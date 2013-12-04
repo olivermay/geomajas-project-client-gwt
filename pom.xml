@@ -73,6 +73,7 @@
 		<module>example-base</module>
 		<module>example</module>
 		<module>example-jar</module>
+		<module>showcase</module>
 	</modules>
 
 	<dependencyManagement>
