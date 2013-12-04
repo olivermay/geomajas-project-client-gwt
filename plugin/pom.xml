@@ -44,6 +44,7 @@
 		<module>widget-layer</module>
 		<module>widget-searchandfilter</module>
 		<module>widget-utility</module>
+		<module>widget-advancedviews</module>
 	</modules>
 	
 </project>

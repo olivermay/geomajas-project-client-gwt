@@ -14,6 +14,7 @@ package org.geomajas.widget.advancedviews.gwt.example.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.smartgwt.client.widgets.Canvas;
 import org.geomajas.gwt.client.Geomajas;
 import org.geomajas.gwt.client.map.event.MapModelEvent;
 import org.geomajas.gwt.client.map.event.MapModelHandler;
@@ -25,6 +26,8 @@ import org.geomajas.gwt.client.widget.LocaleSelect;
 import org.geomajas.gwt.client.widget.MapWidget;
 import org.geomajas.gwt.client.widget.OverviewMap;
 import org.geomajas.gwt.client.widget.Toolbar;
+import org.geomajas.gwt.example.base.SamplePanel;
+import org.geomajas.gwt.example.base.SamplePanelFactory;
 import org.geomajas.widget.advancedviews.client.widget.ExpandingThemeWidget;
 import org.geomajas.widget.advancedviews.client.widget.ThemeWidget;
 import org.geomajas.widget.advancedviews.gwt.example.client.i18n.ApplicationMessages;
@@ -46,12 +49,13 @@ import com.smartgwt.client.widgets.tab.TabSet;
 import com.smartgwt.client.widgets.toolbar.ToolStrip;
 
 /**
- * Entry point and main class for GWT application. This class defines the layout and functionality of this
- * application.
+ * Sample to demonstrate use of the advancedviews plug-in.
  *
- * @author geomajas-gwt-archetype
+ * @author Oliver May
  */
-public class Application implements EntryPoint {
+public class AdvancedViewsPanel extends SamplePanel {
+
+	public static final ApplicationMessages MESSAGES = GWT.create(ApplicationMessages.class);
 
 	private OverviewMap overviewMap;
 	
@@ -65,10 +69,16 @@ public class Application implements EntryPoint {
 	
 	private ExpandingThemeWidget exthemes;
 
-	public Application() {
-	}
+	public static final SamplePanelFactory FACTORY = new SamplePanelFactory() {
+		public SamplePanel createPanel() {
+			return new AdvancedViewsPanel();
+		}
+	};
 
-	public void onModuleLoad() {
+
+	public static final String TITLE = "Advancedviews plug-in";
+
+	public Canvas getViewPanel() {
 		VLayout mainLayout = new VLayout();
 		mainLayout.setWidth100();
 		mainLayout.setHeight100();
@@ -219,6 +229,19 @@ public class Application implements EntryPoint {
 				countries.setFilter("NAME NOT like 'France'");
 			}
 		});
+		return mainLayout;
+	}
+
+	@Override
+	public String getDescription() {
+		return MESSAGES.applicationTitle("");
+	}
+
+	@Override
+	public String[] getConfigurationFiles() {
+		return new String[]{
+				"classpath:org/geomajas/widget/advancedviews/gwt/example/context/applicationContext.xml",
+				"classpath:org/geomajas/widget/advancedviews/gwt/example/context/mapMain.xml"};
 	}
 
 	private void addTab(AbstractTab tab) {

@@ -20,10 +20,9 @@
 	</parent>
 
 	<groupId>org.geomajas.widget</groupId>
-	<artifactId>geomajas-widget-advancedviews-gwt-example</artifactId>
-	<packaging>war</packaging>
-	<name>Geomajas GWT client: Plugin Widget Advancedviews - Example</name>
-	<description>Geomajas GWT client: Plugin Widget Advancedviews - Example</description>
+	<artifactId>geomajas-widget-advancedviews-gwt-example-jar</artifactId>
+	<name>Geomajas GWT client: Plugin Widget Advancedviews - Example Jar</name>
+	<description>Geomajas GWT client: Plugin Widget Advancedviews - Example Jar</description>
 	<url>http://www.geomajas.org/</url>
 
 	<dependencies>
@@ -33,6 +32,10 @@
 		</dependency>
 
 		<!-- Geomajas dependencies -->
+		<dependency>
+			<groupId>org.geomajas</groupId>
+			<artifactId>geomajas-gwt-example-base</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.geomajas</groupId>
 			<artifactId>geomajas-gwt-client</artifactId>
