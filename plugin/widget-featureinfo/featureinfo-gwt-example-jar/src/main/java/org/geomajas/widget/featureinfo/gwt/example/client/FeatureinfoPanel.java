@@ -14,26 +14,20 @@ package org.geomajas.widget.featureinfo.gwt.example.client;
 import com.google.gwt.core.client.GWT;
 import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.widgets.Img;
-import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.SectionStack;
 import com.smartgwt.client.widgets.layout.SectionStackSection;
 import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.toolbar.ToolStrip;
-
 import org.geomajas.gwt.client.util.WidgetLayout;
 import org.geomajas.gwt.client.widget.LayerTree;
 import org.geomajas.gwt.client.widget.Legend;
-import org.geomajas.gwt.client.widget.LocaleSelect;
 import org.geomajas.gwt.client.widget.MapWidget;
 import org.geomajas.gwt.client.widget.OverviewMap;
 import org.geomajas.gwt.client.widget.Toolbar;
 import org.geomajas.gwt.example.base.SamplePanel;
 import org.geomajas.gwt.example.base.SamplePanelFactory;
 import org.geomajas.widget.featureinfo.client.widget.factory.WidgetFactory;
-import org.geomajas.widget.featureinfo.gwt.example.client.
-		customfeatureinfowidgets.CustomCountriesFeatureInfoCanvasBuilder;
+import org.geomajas.widget.featureinfo.gwt.example.client.customfeatureinfowidgets.CustomCountriesFeatureInfoCanvasBuilder;
 import org.geomajas.widget.featureinfo.gwt.example.client.i18n.ApplicationMessages;
 
 /**
@@ -62,41 +56,10 @@ public class FeatureinfoPanel extends SamplePanel {
 	
 	@Override
 	public Canvas getViewPanel() {
-		VLayout mainLayout = new VLayout();
+		HLayout mainLayout = new HLayout();
 		mainLayout.setWidth100();
 		mainLayout.setHeight100();
 
-		// ---------------------------------------------------------------------
-		// Top bar:
-		// ---------------------------------------------------------------------
-		ToolStrip topBar = new ToolStrip();
-		topBar.setHeight(33);
-		topBar.setWidth100();
-		topBar.addSpacer(6);
-
-		Img icon = new Img("[ISOMORPHIC]/geomajas/geomajas_desktopicon_small.png");
-		icon.setSize(24);
-		topBar.addMember(icon);
-		topBar.addSpacer(6);
-
-		Label title = new Label(MESSAGES.applicationTitle("Feature info"));
-		title.setStyleName("appTitle");
-		title.setWidth(300);
-		topBar.addMember(title);
-		topBar.addFill();
-		topBar.addMember(new LocaleSelect("Nederlands"));
-
-		mainLayout.addMember(topBar);
-
-		HLayout layout = new HLayout();
-		layout.setWidth100();
-		layout.setHeight100();
-		layout.setMembersMargin(5);
-		layout.setMargin(5);
-
-		// ---------------------------------------------------------------------
-		// Create the left-side (map and tabs):
-		// ---------------------------------------------------------------------
 		final MapWidget map = new MapWidget("mapMain", "featureInfoApp");
 		final Toolbar toolbar = new Toolbar(map);
 		toolbar.setButtonSize(WidgetLayout.toolbarLargeButtonSize);
@@ -112,7 +75,7 @@ public class FeatureinfoPanel extends SamplePanel {
 		leftLayout.setShowEdges(true);
 		leftLayout.addMember(mapLayout);
 
-		layout.addMember(leftLayout);
+		mainLayout.addMember(leftLayout);
 
 		// ---------------------------------------------------------------------
 		// Create the right-side (overview map, layer-tree, legend):
@@ -146,13 +109,11 @@ public class FeatureinfoPanel extends SamplePanel {
 		sectionStack.addSection(section3);
 
 		// Putting the right side layouts together:
-		layout.addMember(sectionStack);
+		mainLayout.addMember(sectionStack);
 
 		registerWidgetBuilders();
 		legend.setHeight(200);
 		overviewMap.setHeight(200);
-
-		mainLayout.addMember(layout);
 
 		return mainLayout;
 	}

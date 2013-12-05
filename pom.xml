@@ -377,12 +377,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.geomajas.widget</groupId>
-				<artifactId>geomajas-widget-advancedviews-example</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.geomajas.widget</groupId>
-				<artifactId>geomajas-widget-advancedviews-example-jar</artifactId>
+				<artifactId>geomajas-widget-advancedviews-gwt-example-jar</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

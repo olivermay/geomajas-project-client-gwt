@@ -10,6 +10,8 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.geomajas.project</groupId>
 		<artifactId>geomajas-project-client-gwt</artifactId>
@@ -88,7 +90,6 @@
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
 			<artifactId>geomajas-layer-tms</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -120,11 +121,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-plugin-printing-gwt</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.geomajas.widget</groupId>
 			<artifactId>geomajas-widget-utility-gwt-example-jar</artifactId>
 		</dependency>
@@ -144,9 +140,13 @@
 			<groupId>org.geomajas.widget</groupId>
 			<artifactId>geomajas-widget-featureinfo-gwt-example-jar</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.geomajas.widget</groupId>
+			<artifactId>geomajas-widget-advancedviews-gwt-example-jar</artifactId>
+		</dependency>
  		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-layer-google-gwt-example-jar</artifactId>
+			<artifactId>geomajas-client-gwt-layer-googlemaps-example-jar</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
@@ -154,7 +154,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-plugin-printing-gwt-example-jar</artifactId>
+			<artifactId>geomajas-client-gwt-plugin-print-example-jar</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
@@ -171,13 +171,13 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>${gwt-version}</version>
+			<version>${gwt-client-gwt-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
-			<version>${gwt-version}</version>
+			<version>${gwt-client-gwt-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -296,12 +296,12 @@
 					<dependency>
 						<groupId>com.google.gwt</groupId>
 						<artifactId>gwt-user</artifactId>
-						<version>${gwt-version}</version>
+						<version>${gwt-client-gwt-version}</version>
 					</dependency>
 					<dependency>
 						<groupId>com.google.gwt</groupId>
 						<artifactId>gwt-dev</artifactId>
-						<version>${gwt-version}</version>
+						<version>${gwt-client-gwt-version}</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -414,7 +414,7 @@
 				<dependency>
 					<groupId>com.google.gwt</groupId>
 					<artifactId>gwt-dev</artifactId>
-					<version>${gwt-version}</version>
+					<version>${gwt-client-gwt-version}</version>
 					<scope>provided</scope>
 				</dependency>
 			</dependencies>
@@ -515,7 +515,6 @@
 	</repositories>
 
 	<properties>
-		<gwt-version>2.5.0</gwt-version>
 		<gwt.compiler.skip>false</gwt.compiler.skip>
 	</properties>
 

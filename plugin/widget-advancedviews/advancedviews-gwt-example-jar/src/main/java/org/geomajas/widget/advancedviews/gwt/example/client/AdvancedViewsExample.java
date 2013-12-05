@@ -29,8 +29,10 @@ public class AdvancedViewsExample implements EntryPoint {
 
 	public void onModuleLoad() {
 
+		SampleTreeNodeRegistry.addSampleTreeNode(new SampleTreeNode("Advanced Views Widgets",
+				"[ISOMORPHIC]/geomajas/silk/plugin.png", "Advanced Views Widgets", "Plugins"));
 		SampleTreeNodeRegistry.addSampleTreeNode(new SampleTreeNode(MESSAGES.applicationTitle("Advanced views"),
-				"[ISOMORPHIC]/geomajas/osgeo/layer-raster.png", AdvancedViewsPanel.TITLE, "Plugins",
+				"[ISOMORPHIC]/geomajas/osgeo/layer-raster.png", AdvancedViewsPanel.TITLE, "Advanced Views Widgets",
 				AdvancedViewsPanel.FACTORY));
 	}
 }

@@ -35,7 +35,6 @@ import org.geomajas.widget.advancedviews.gwt.example.client.pages.AbstractTab;
 import org.geomajas.widget.advancedviews.gwt.example.client.pages.FeatureListGridPage;
 import org.geomajas.widget.advancedviews.gwt.example.client.pages.SearchPage;
 
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.smartgwt.client.types.Side;
 import com.smartgwt.client.types.VisibilityMode;
@@ -57,14 +56,6 @@ public class AdvancedViewsPanel extends SamplePanel {
 
 	public static final ApplicationMessages MESSAGES = GWT.create(ApplicationMessages.class);
 
-	private OverviewMap overviewMap;
-	
-	private TabSet tabSet = new TabSet();
-
-	private List<AbstractTab> tabs = new ArrayList<AbstractTab>();
-
-	private ApplicationMessages messages = GWT.create(ApplicationMessages.class);
-
 	private ThemeWidget themes;
 	
 	private ExpandingThemeWidget exthemes;
@@ -75,120 +66,30 @@ public class AdvancedViewsPanel extends SamplePanel {
 		}
 	};
 
+	public AdvancedViewsPanel () {
+
+	}
+
 
 	public static final String TITLE = "Advancedviews plug-in";
 
 	public Canvas getViewPanel() {
-		VLayout mainLayout = new VLayout();
-		mainLayout.setWidth100();
-		mainLayout.setHeight100();
-
-		// ---------------------------------------------------------------------
-		// Top bar:
-		// ---------------------------------------------------------------------
-		ToolStrip topBar = new ToolStrip();
-		topBar.setHeight(33);
-		topBar.setWidth100();
-		topBar.addSpacer(6);
-
-		Img icon = new Img("[ISOMORPHIC]/geomajas/geomajas_desktopicon_small.png");
-		icon.setSize(24);
-		topBar.addMember(icon);
-		topBar.addSpacer(6);
-
-		Label title = new Label(messages.applicationTitle("hello world"));
-		title.setStyleName("appTitle");
-		title.setWidth(300);
-		topBar.addMember(title);
-		topBar.addFill();
-		topBar.addMember(new LocaleSelect("English"));
-
-		mainLayout.addMember(topBar);
 
 		HLayout layout = new HLayout();
 		layout.setWidth100();
 		layout.setHeight100();
 		layout.setMembersMargin(5);
 		layout.setMargin(5);
+		layout.setShowEdges(true);
 
 		// ---------------------------------------------------------------------
 		// Create the left-side (map and tabs):
 		// ---------------------------------------------------------------------
-		final MapWidget map = new MapWidget("mapMain", "app");
+		final MapWidget map = new MapWidget("mapMain", "advancedViewsApp");
 		final Toolbar toolbar = new Toolbar(map);
 		toolbar.setButtonSize(Toolbar.BUTTON_SIZE_BIG);
 
-		VLayout mapLayout = new VLayout();
-		mapLayout.setShowResizeBar(true);
-		mapLayout.setResizeBarTarget("tabs");
-		mapLayout.addMember(toolbar);
-		mapLayout.addMember(map);
-		mapLayout.setHeight("65%");
-		tabSet.setTabBarPosition(Side.TOP);
-		tabSet.setWidth100();
-		tabSet.setHeight("35%");
-		tabSet.setID("tabs");
-
-		VLayout leftLayout = new VLayout();
-		leftLayout.setShowEdges(true);
-		leftLayout.addMember(mapLayout);
-		leftLayout.addMember(tabSet);
-
-		layout.addMember(leftLayout);
-
-		// ---------------------------------------------------------------------
-		// Create the right-side (overview map, layer-tree, legend):
-		// ---------------------------------------------------------------------
-		final SectionStack sectionStack = new SectionStack();
-		sectionStack.setShowEdges(true);
-		sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
-		sectionStack.setCanReorderSections(true);
-		sectionStack.setCanResizeSections(false);
-		sectionStack.setSize("300px", "100%");
-
-		// Putting the right side layouts together:
-		layout.addMember(sectionStack);
-
-		// ---------------------------------------------------------------------
-		// Create the right-side (overview map, layer-tree, legend):
-		// ---------------------------------------------------------------------
-		final SectionStack originalSectionStack = new SectionStack();
-		originalSectionStack.setShowEdges(true);
-		originalSectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
-		originalSectionStack.setCanReorderSections(true);
-		originalSectionStack.setCanResizeSections(false);
-		originalSectionStack.setSize("250px", "100%");
-
-		// Overview map layout:
-		SectionStackSection osection1 = new SectionStackSection("Overview map");
-		osection1.setExpanded(true);
-		overviewMap = new OverviewMap("mapOverview", "app", map, false, true);
-		osection1.addItem(overviewMap);
-		originalSectionStack.addSection(osection1);
-
-		// LayerTree layout:
-		SectionStackSection osection2 = new SectionStackSection("Layer tree");
-		osection2.setExpanded(true);
-		LayerTree lt = new LayerTree(map);
-		osection2.addItem(lt);
-		originalSectionStack.addSection(osection2);
-
-		// Legend layout:
-		SectionStackSection osection3 = new SectionStackSection("Legend");
-		osection3.setExpanded(true);
-		Legend l = new Legend(map.getMapModel());
-		osection3.addItem(l);
-		originalSectionStack.addSection(osection3);
-
-		// Putting the right side layouts together:
-		layout.addMember(originalSectionStack);
-
-		// ---------------------------------------------------------------------
-		// Bottom left: Add tabs here:
-		// ---------------------------------------------------------------------
-		FeatureListGridPage page1 = new FeatureListGridPage(map);
-		addTab(new SearchPage(map, tabSet, page1.getTable()));
-		addTab(page1);
+		layout.addMember(map);
 
 		// ---------------------------------------------------------------------
 		// Theme
@@ -207,29 +108,7 @@ public class AdvancedViewsPanel extends SamplePanel {
 		exthemes.setSnapOffsetLeft(-20);
 		exthemes.setWidth(160);
 
-		// ---------------------------------------------------------------------
-		// Finally draw everything:
-		// ---------------------------------------------------------------------
-		mainLayout.addMember(layout);
-		mainLayout.draw();
-		
-		// Install a loading screen
-		// This only works if the application initially shows a map with at least 1 vector layer:
-		LoadingScreen loadScreen = new LoadingScreen(map, "Simple GWT application using Geomajas "
-				+ Geomajas.getVersion());
-		loadScreen.draw();
-
-		// Then initialize:
-		initialize();
-		
-		// -- Filter layer to show filterIcon
-		map.getMapModel().addMapModelHandler(new MapModelHandler() {
-			public void onMapModelChange(MapModelEvent event) {
-				VectorLayer countries = map.getMapModel().getVectorLayer("clientLayerCountries");
-				countries.setFilter("NAME NOT like 'France'");
-			}
-		});
-		return mainLayout;
+		return layout;
 	}
 
 	@Override
@@ -241,19 +120,7 @@ public class AdvancedViewsPanel extends SamplePanel {
 	public String[] getConfigurationFiles() {
 		return new String[]{
 				"classpath:org/geomajas/widget/advancedviews/gwt/example/context/applicationContext.xml",
-				"classpath:org/geomajas/widget/advancedviews/gwt/example/context/mapMain.xml"};
-	}
-
-	private void addTab(AbstractTab tab) {
-		tabSet.addTab(tab);
-		tabs.add(tab);
-	}
-
-	private void initialize() {
-		overviewMap.setHeight(200);
-
-		for (AbstractTab tab : tabs) {
-			tab.initialize();
-		}
+				"classpath:org/geomajas/widget/advancedviews/gwt/example/context/mapMain.xml",
+				"classpath:org/geomajas/widget/advancedviews/gwt/example/context/themesInfo.xml"};
 	}
 }
