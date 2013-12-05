@@ -23,6 +23,8 @@ import org.geomajas.plugin.editing.jsapi.client.gfx.JsGeometryRenderer;
 import org.geomajas.plugin.editing.jsapi.client.merge.JsGeometryMergeService;
 import org.geomajas.plugin.editing.jsapi.client.service.JsGeometryEditService;
 import org.geomajas.plugin.editing.jsapi.client.split.JsGeometrySplitService;
+import org.geomajas.plugin.editing.jsapi.gwt.client.contectmenu.JsVertexContextMenuRegistry;
+import org.geomajas.plugin.editing.jsapi.gwt.client.gfx.JsSnapService;
 import org.geomajas.plugin.editing.jsapi.gwt.client.gfx.JsStyleService;
 import org.geomajas.plugin.jsapi.client.map.Map;
 import org.geomajas.plugin.jsapi.gwt.client.exporter.map.MapImpl;
@@ -35,6 +37,7 @@ import org.timepedia.exporter.client.NoExport;
  * Central geometry editor for the JavaScript API on top of the GWT face.
  * 
  * @author Pieter De Graef
+ * @author Jan Venstermans
  * @since 1.0.0
  */
 @Export("GeometryEditor")
@@ -58,6 +61,10 @@ public class JsGeometryEditor implements Exportable {
 
 	private JsGeometryRenderer renderer;
 
+	private JsVertexContextMenuRegistry vertexContextMenuRegistry;
+
+	private JsSnapService snapService;
+
 	/**
 	 * Needed for Gwt exporter.
 	 */
@@ -78,6 +85,8 @@ public class JsGeometryEditor implements Exportable {
 		mergeService = new JsGeometryMergeService();
 		renderer = new JsGeometryRenderer(delegate.getRenderer());
 		styleService = new JsStyleService(delegate.getStyleService());
+		vertexContextMenuRegistry = new JsVertexContextMenuRegistry(this);
+		snapService = new JsSnapService(this);
 	}
 
 	/**
@@ -150,6 +159,15 @@ public class JsGeometryEditor implements Exportable {
 	}
 
 	/**
+	 * Get wrapper for the snapping service.
+	 *
+	 * @return the renderer
+	 */
+	public JsSnapService getSnapService() {
+		return snapService;
+	}
+
+	/**
 	 * Should we zoom to the geometry when editing starts ?
 	 * 
 	 * @return true when zooming, false otherwise
@@ -219,4 +237,12 @@ public class JsGeometryEditor implements Exportable {
 		return delegate;
 	}
 
+	/**
+	 * Get wrapper for the style service.
+	 *
+	 * @return the renderer
+	 */
+	public JsVertexContextMenuRegistry getVertexContextMenuRegistry() {
+		return vertexContextMenuRegistry;
+	}
 }
