@@ -117,20 +117,22 @@ public abstract class AbstractThemeWidget extends Canvas implements MapViewChang
 		RangeConfig config = getRangeConfigForCurrentScale(viewConfig, mapWidget.getMapModel().getMapView()
 				.getCurrentScale());
 
-		if (themeInfo.isHideOtherlayers()) {
-			for (Layer<?> layer : mapWidget.getMapModel().getLayers()) {
-				layer.setVisible(false);
-			}
-		}
-		for (LayerConfig layerConfig : config.getLayerConfigs()) {
-			Layer<?> layer = mapWidget.getMapModel().getLayer(layerConfig.getLayer().getId());
-			if (layer != null) {
-				layer.setVisible(layerConfig.isVisible());
-				if (layer instanceof RasterLayer) {
-					((RasterLayer) layer).setOpacity(layerConfig.getOpacity());
+		if (config != null) {
+			if (themeInfo.isHideOtherlayers()) {
+				for (Layer<?> layer : mapWidget.getMapModel().getLayers()) {
+					layer.setVisible(false);
 				}
-			} else {
-				GWT.log("ThemeWidget: could not find layer: " + layerConfig.getLayer().getId());
+			}
+			for (LayerConfig layerConfig : config.getLayerConfigs()) {
+				Layer<?> layer = mapWidget.getMapModel().getLayer(layerConfig.getLayer().getId());
+				if (layer != null) {
+					layer.setVisible(layerConfig.isVisible());
+					if (layer instanceof RasterLayer) {
+						((RasterLayer) layer).setOpacity(layerConfig.getOpacity());
+					}
+				} else {
+					GWT.log("ThemeWidget: could not find layer: " + layerConfig.getLayer().getId());
+				}
 			}
 		}
 		// LayerShownEvents are run async, we need to deactivate after these.

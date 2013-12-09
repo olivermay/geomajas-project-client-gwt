@@ -50,6 +50,7 @@
 		<module>advancedviews-gwt</module>
 		<module>advancedviews-editor</module>
 		<module>advancedviews-gwt-example-jar</module>
+		<module>advancedviews-gwt-example</module>
 	</modules>
 
 	<profiles>
