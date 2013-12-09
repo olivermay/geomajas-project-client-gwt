@@ -15,5 +15,6 @@
 
 	<modules>
 		<module>deskmanager-gwt</module>
+		<module>deskmanager-gwt-editor-api</module>
 	</modules>
 </project>

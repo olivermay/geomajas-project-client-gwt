@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<groupId>org.geomajas.plugin</groupId>
 		<artifactId>geomajas-client-gwt-plugin-deskmanager-parent</artifactId>
+		<groupId>org.geomajas.plugin</groupId>
 		<version>1.15.0-SNAPSHOT</version>
 	</parent>
+	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>geomajas-plugin-deskmanager-gwt</artifactId>
-	<packaging>jar</packaging>
-	<name>Geomajas GWT client: Plugin Deskmanager - GWT</name>
-	<description>Geomajas GWT client: Plugin Deskmanager - GWT</description>
+	<artifactId>geomajas-plugin-deskmanager-gwt-editor-api</artifactId>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-plugin-deskmanager-gwt-editor-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-plugin-deskmanager</artifactId>
+			<artifactId>geomajas-plugin-deskmanager-api</artifactId>
 		</dependency>
 
 		<!-- Geomajas dependencies -->
 		<dependency>
 			<groupId>org.geomajas</groupId>
 			<artifactId>geomajas-gwt-client</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.geomajas.plugin</groupId>
-			<artifactId>geomajas-plugin-runtimeconfig-gwt</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.geomajas.project</groupId>
-			<artifactId>geomajas-project-sld-editor-expert-gwt</artifactId>
 		</dependency>
 
 		<!-- Google dependencies -->
@@ -61,6 +46,7 @@
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -79,41 +65,6 @@
 				</excludes>
 			</resource>
 		</resources>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-antrun-plugin
-										</artifactId>
-										<versionRange>
-											[1.3,)
-										</versionRange>
-										<goals>
-											<goal>run</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 	<profiles>
 		<!-- include sources in build -->
@@ -146,5 +97,5 @@
 			</activation>
 		</profile>
 	</profiles>
-</project>
 
+</project>
