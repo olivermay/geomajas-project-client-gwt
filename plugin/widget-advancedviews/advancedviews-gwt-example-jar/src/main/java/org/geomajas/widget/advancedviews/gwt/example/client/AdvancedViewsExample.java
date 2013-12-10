@@ -34,5 +34,9 @@ public class AdvancedViewsExample implements EntryPoint {
 		SampleTreeNodeRegistry.addSampleTreeNode(new SampleTreeNode(MESSAGES.applicationTitle("Advanced views"),
 				"[ISOMORPHIC]/geomajas/osgeo/layer-raster.png", AdvancedViewsPanel.TITLE, "Advanced Views Widgets",
 				AdvancedViewsPanel.FACTORY));
+		SampleTreeNodeRegistry.addSampleTreeNode(new SampleTreeNode(MESSAGES.applicationTitle("Advanced views " +
+				"editor"),
+				"[ISOMORPHIC]/geomajas/osgeo/layer-raster.png", AdvancedViewsEditorPanel.TITLE, "Advanced Views Widgets",
+				AdvancedViewsEditorPanel.FACTORY));
 	}
 }
