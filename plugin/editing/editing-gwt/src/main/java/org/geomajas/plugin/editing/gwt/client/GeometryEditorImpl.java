@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2013 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -32,7 +32,7 @@ import org.geomajas.plugin.editing.gwt.client.controller.GeometryIndexContextMen
 import org.geomajas.plugin.editing.gwt.client.event.GeometryIndexMouseOverOutEvent;
 import org.geomajas.plugin.editing.gwt.client.gfx.GeometryRendererImpl;
 import org.geomajas.plugin.editing.gwt.client.gfx.StyleService;
-import org.geomajas.plugin.editing.gwt.client.handler.GeometryIndexMouseInMouseOutHandler;
+import org.geomajas.plugin.editing.gwt.client.handler.GeometryIndexMouseInMouseOutFactory;
 
 /**
  * Top level geometry editor for the GWT face.
@@ -71,7 +71,6 @@ public class GeometryEditorImpl implements GeometryEditor, GeometryEditStartHand
 		service = new GeometryEditServiceImpl();
 		service.addGeometryEditStartHandler(this);
 		service.addGeometryEditStopHandler(this);
-		geometryIndexContextMenuController = new GeometryIndexContextMenuController(mapWidget, service);
 
 		snappingService = new SnapService();
 		baseController = new EditGeometryBaseController(mapWidget, service, snappingService);
@@ -106,9 +105,6 @@ public class GeometryEditorImpl implements GeometryEditor, GeometryEditStartHand
 		service.getIndexStateService().addGeometryIndexSnappingBeginHandler(renderer);
 		service.getIndexStateService().addGeometryIndexSnappingEndHandler(renderer);
 
-		getGeometryEditorSpecificEventbus().addHandler(GeometryIndexMouseOverOutEvent.getType(),
-				geometryIndexContextMenuController);
-
 		mapWidget.getMapModel().getMapView().addMapViewChangedHandler(new MapViewChangedHandler() {
 
 			public void onMapViewChanged(MapViewChangedEvent event) {
@@ -121,8 +117,8 @@ public class GeometryEditorImpl implements GeometryEditor, GeometryEditStartHand
 			}
 		});
 
-		renderer.addVertexHandlerFactory(new GeometryIndexMouseInMouseOutHandler(geometryEditorSpecificEventbus));
-		renderer.addEdgeHandlerFactory(new GeometryIndexMouseInMouseOutHandler(geometryEditorSpecificEventbus));
+		renderer.addVertexHandlerFactory(new GeometryIndexMouseInMouseOutFactory(geometryEditorSpecificEventbus));
+		renderer.addEdgeHandlerFactory(new GeometryIndexMouseInMouseOutFactory(geometryEditorSpecificEventbus));
 	}
 
 	// GeometryEditWorkflowHandler implementation:
@@ -165,6 +161,13 @@ public class GeometryEditorImpl implements GeometryEditor, GeometryEditStartHand
 	@Override
 	public GeometryIndexContextMenuController getContextMenuController() {
 		return geometryIndexContextMenuController;
+	}
+
+	@Override
+	public void setContextMenuController(GeometryIndexContextMenuController contextMenuController) {
+		geometryIndexContextMenuController = contextMenuController;
+		getGeometryEditorSpecificEventbus().addHandler(GeometryIndexMouseOverOutEvent.getType(),
+				geometryIndexContextMenuController);
 	}
 
 	@Override

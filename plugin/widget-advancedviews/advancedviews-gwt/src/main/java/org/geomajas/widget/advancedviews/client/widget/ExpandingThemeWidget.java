@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2013 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -62,6 +62,8 @@ public class ExpandingThemeWidget extends AbstractThemeWidget {
 	protected VLayout panel;
 	
 	private boolean showShadow;
+
+	private boolean showOutOfRangeThemes;
 
 	public ExpandingThemeWidget(MapWidget mapWidget) {
 		super(mapWidget);
@@ -167,7 +169,8 @@ public class ExpandingThemeWidget extends AbstractThemeWidget {
 
 		// -- add required buttons
 		for (ViewConfigItem item : viewConfigItems) {
-			if (!item.equals(activeViewConfig)) {
+			if (!item.equals(activeViewConfig) && (showOutOfRangeThemes || getRangeConfigForCurrentScale(item
+					.getViewConfig(), mapWidget.getMapModel().getMapView().getCurrentScale()) != null)) {
 				panel.addMember((MenuItem) item.getButton());
 			}
 		}
@@ -325,4 +328,24 @@ public class ExpandingThemeWidget extends AbstractThemeWidget {
 	public void setMenuWidth(int menuWidth) {
 		this.menuWidth = menuWidth;
 	}
+
+	/**
+	 * True if you want to display out of range themes. The default behaviour is false,
+	 * thus hiding themes that are not in range.
+	 *
+	 */
+	public boolean isShowOutOfRangeThemes() {
+		return showOutOfRangeThemes;
+	}
+
+	/**
+	 * Set to true if you want to display out of range themes. The default behaviour is false,
+	 * thus hiding themes that are not in range.
+	 *
+	 * @param showOutOfRangeThemes
+	 */
+	public void setShowOutOfRangeThemes(boolean showOutOfRangeThemes) {
+		this.showOutOfRangeThemes = showOutOfRangeThemes;
+	}
+
 }

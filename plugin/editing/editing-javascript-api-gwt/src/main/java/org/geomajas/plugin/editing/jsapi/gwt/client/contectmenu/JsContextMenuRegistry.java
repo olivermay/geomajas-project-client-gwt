@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2013 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -28,17 +28,17 @@ import org.timepedia.exporter.client.Exportable;
  * @since 1.0.0
  * 
  */
-@Export("VertexContextMenuRegister")
+@Export("ContextMenuRegister")
 @ExportPackage("org.geomajas.plugin.editing.contextmenu")
 @Api(allMethods = true)
-public class JsVertexContextMenuRegistry implements Exportable {
+public class JsContextMenuRegistry implements Exportable {
 
 	private GeometryEditor editor;
 
 	/**
 	 * Needed for exporter.
 	 */
-	public JsVertexContextMenuRegistry() {
+	public JsContextMenuRegistry() {
 	}
 
 	/**
@@ -47,8 +47,10 @@ public class JsVertexContextMenuRegistry implements Exportable {
 	 * @param jsEditor the editor service
 	 */
 	@Export
-	public JsVertexContextMenuRegistry(JsGeometryEditor jsEditor) {
+	public JsContextMenuRegistry(JsGeometryEditor jsEditor) {
 		editor = jsEditor.getDelegate();
+		editor.setContextMenuController(new GeometryIndexContextMenuController(editor.getMapWidget(),
+				editor.getEditService()));
 	}
 
 	/**

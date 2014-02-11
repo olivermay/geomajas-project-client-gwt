@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2013 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -135,12 +135,9 @@ public class CompositeGeometryIndexController extends AbstractGraphicsController
 	}
 
 	public void onDown(HumanInputEvent<?> event) {
-		if (service.getIndexStateService().isEnabled(index)) {
-			// if right click: don't perform the handlers, let context menu do its work
-			if (!isRightMouseButton(event)) {
-				for (MapDownHandler handler : downHandlers) {
-						handler.onDown(event);
-					}
+		if (!isRightMouseButton(event)) {
+			for (MapDownHandler handler : downHandlers) {
+				handler.onDown(event);
 			}
 		}
 	}

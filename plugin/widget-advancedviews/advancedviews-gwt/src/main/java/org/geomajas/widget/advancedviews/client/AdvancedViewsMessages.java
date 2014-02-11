@@ -1,7 +1,7 @@
 /*
  * This is part of Geomajas, a GIS framework, http://www.geomajas.org/.
  *
- * Copyright 2008-2013 Geosparc nv, http://www.geosparc.com/, Belgium.
+ * Copyright 2008-2014 Geosparc nv, http://www.geosparc.com/, Belgium.
  *
  * The program is available in open source according to the GNU Affero
  * General Public License. All contributions in this program are covered
@@ -67,4 +67,15 @@ public interface AdvancedViewsMessages extends Messages {
 	String detailTabThemes();
 
 	String themeConfigBackButtonLabel();
+	
+	// configuration of image
+	String imageConfigurationEditorName();
+	String imageConfigLinkTitle();
+	String imageConfigAltTitle();
+	String imageConfigAltTooltip();
+	String imageConfigFileTitle();
+	String imageConfigGroupTitle();
+	String imageConfigIdealSize(int width, int height);
+
+	String themeConfigDefaultActive();
 }
